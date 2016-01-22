@@ -9,8 +9,7 @@ selecting and create array from collection for easier iterate, and many other in
 
 Only 14 kb in uncompressed style and 4 kb in compressed.
 
-To use it, you just need to include a library file to your web-page 
-<code><script type="text/javascript" src="/your_path/WellUI.js"></script></code>
+To use it, you just need to include a library file in to your web-page 
 
 <a href="http://wellnine.github.io/WellUI" target="_blank">Documentation and demo</a>  
 <i>All code examples  you can execute in console and see result.</i>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="UTF-8">
+        <title>WellUI - tiny vanila-JS lib</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="WellUI - simple vanila-JS lib">
+        <meta name="keywords" content="WellUI, lib, javascript, native js, helpers">
+        <meta name="author" content="Wellnine">
+        <link rel="shortcut icon" href="./favicon_wellnine.ico">
+        <link rel="stylesheet" type="text/css" href="./styles/style.css">
+
+</head>
+    <body>
+        <div class="container">
+			<header>
+				<h1>Well UI</h1>
+				<h2>The library that makes work of javascript-developers a little bit easier</h2>
+				<p class="demos">
+					<a href="#sub1">getElemsArr</a>
+					<a href="#sub2">operateElems</a>
+					<a href="#sub3">setStyles</a>
+					<a href="#sub4">getContentHeight</a>
+					<a href="#sub5">getContentMargin</a>
+					<a href="#sub6">fadeOut</a>
+					<a href="#sub7">fadeIn</a>
+					<a href="#sub8">transitionEndCallback</a>
+					<a href="#sub9">searchParentByClassName</a>
+					<a href="#sub10">holdEvent</a>
+					<a href="#sub11">getTransitionEndEventName</a>
+					<a href="#sub12">extend</a>
+				</p>
+			</header>
+			<section class="sub" id="sub1">
+				<div class="example">
+					<h3 id="example1">getElemsArr</h3>
+					makes collection of items and converts them to array
+
+					<div class="officialConfig">
+						<code>WellUI.getElemsArr(cssSeelctor);</code>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">cssSelector {String}</mark></span>
+							<span class="sDocText">Css selector for items that needed for selection</span>
+						</span>
+					</div>
+				</div>
+				<div class="code">
+					<h4>Get array of all elements with "example" class</h4>
+					<code>WellUI.getElemsArr('.example');</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+				</div>
+				<div class="clr"></div>
+			</section>
+			<section class="sub" id="sub2">
+				<div class="example">
+					<h3 id="example2">operateElems</h3>
+					Operations with elements. If 3-d parameter is not set - works like forEach, if  set - bing operations to one event or multiple events
+
+					<div class="officialConfig">
+						<code> WellUI.operateElems(elemsArray, cb, eventsName)</code>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">elemsArray {Array}</mark></span>
+							<span class="jDocText">Array of elements for handling</span>
+						</span>
+
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">cb {Function}</mark></span>
+							<span class="jDocText">
+								Callback that will be apply for event when is set or just work when elements will be iterated (when event is not set)
+								!Important:   <b>this</b> ->  iterated element
+							</span>
+						</span>
+
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">eventsName {String | Array}</mark></span>
+							<span class="jDocText">
+								Event name. If one event, format will be like this: 'click', but when you want use cb for multiple events
+								format will be like this: ['click', 'mouseover']
+							</span>
+						</span>
+					</div>
+				</div>
+				<div class="code">
+					<h4>Do something with each element with 'example' class without event handling</h4>
+					<code>
+						WellUI.operateElems(WellUI.getElemsArr('.example'),
+						function () {
+						this.style.backgroundColor = 'green';
+						});
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+					<p>tip: You can use for create array of elements - getElemsArr.</p>
+
+					<h4>Do something with each element with 'example' class with one event handling</h4>
+					<code>
+						WellUI.operateElems(WellUI.getElemsArr('.example'),
+						function () {
+						this.style.backgroundColor = 'red';
+						}, 'mouseover');
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+					<p>After execute code in console try hover mouse on method description.</p>
+
+					<h4>Do something with each element with 'example' class with multiple event handling</h4>
+					<code>
+						WellUI.operateElems(WellUI.getElemsArr('.example'),
+						function () {
+						this.style.backgroundColor = 'red';
+						}, ['click', 'mouseout']);
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+					<p>After execute code in console try click mouse on method description
+						and try out mouse on other non-marked element.
+					</p>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+			<section class="sub" id="sub3">
+				<div class="example">
+					<h3 id="example3">setStyles</h3>
+					Add multiple css-rules to element (analogue native cssText)
+
+					<div class="officialConfig">
+						<code> WellUI.setStyle(element, propertyObject)</code>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">element {HTMLElement}</mark></span>
+							<span class="jDocText">Handled element</span>
+						</span>
+
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">propertyObject {Object}</mark></span>
+							<span class="jDocText">
+								Object with some css-rules
+							</span>
+						</span>
+
+					</div>
+				</div>
+				<div class="code">
+					<h4>Transform element with 'example3' id and highlight them</h4>
+					<code>
+						WellUI.setStyles(document.getElementById('example3'), {
+						"transform" : "skew(0,-3deg)",
+						"box-shadow" : "0 1px 3px 5px rgba(16,255,235, .3)",
+						"margin-bottom" : "20px"
+						})
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+			<section class="sub" id="sub4">
+				<div class="example" id="contH">
+					<h3 id="example4">getContentHeight</h3>
+					Get content height of child elements in some element
+
+					<div class="officialConfig">
+						<code> WellUI.getContentHeight(childsArr)</code>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">childsArr {Array}</mark></span>
+							<span class="jDocText">Array of child elements that their sum height we want to know</span>
+						</span>
+
+					</div>
+				</div>
+				<div class="code">
+					<h4>Let`s try to get content height of element with 'contH' id</h4>
+					<code>
+						var contHChildItems = document.getElementById('contH').childNodes;
+						<br>
+						<br>
+						console.log(
+							WellUI.getContentHeight( WellUI.getElemsArr(contHChildItems) )
+						);
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+			<section class="sub" id="sub5">
+				<div class="example" id="marg">
+					<h3 id="example5">getContentMargin</h3>
+					Get margin sum of an elements
+
+					<div class="officialConfig">
+						<code> WellUI.getContentMargin(elemsArr)</code>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">elemsArr {Array}</mark></span>
+							<span class="jDocText">Array of elements that their sum margin we want to know</span>
+						</span>
+
+					</div>
+				</div>
+				<div class="code">
+					<h4>Let`s try to get sum of margin from child nodes of element with 'marg' id</h4>
+					<code>
+						var margChildItems = document.getElementById('marg').childNodes;
+						<br>
+						<br>
+						console.log(WellUI.getContentMargin( WellUI.getElemsArr(margChildItems)) );
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+
+			<section class="sub" id="sub6">
+				<div class="example">
+					<h3 id="example6">fadeOut</h3>
+					Fade out animation
+
+					<div class="officialConfig">
+						<code> WellUI.fadeOut(elem, options)</code>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">elem {HTMLElement}</mark></span>
+							<span class="jDocText">Element for operate</span>
+						</span>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">options {Object}</mark></span>
+							<span class="jDocText">Animation config: <br>
+								 <b>duration</b> {Int} {Default value| 1}  -> animation duration <br>
+        						 <b>timing</b> {String} {Default value| ease-in} -> animation timing function <br>
+        						 <b>callback</b> {function} {Default value| null} -> callback function that fire when animation is done
+							</span>
+						</span>
+
+					</div>
+				</div>
+				<div class="code">
+					<h4>Use with default config</h4>
+					<code>
+						WellUI.fadeOut(document.getElementById('example6'));
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+					<h4>Use with custom config</h4>
+					<code>
+						WellUI.fadeOut( document.getElementById('example6'), {
+						'duration' : 2,
+						'timing' : 'linear',
+						'callback' : function () {
+						console.log("fading done")
+						}
+						});
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+
+			<section class="sub" id="sub7">
+				<div class="example">
+					<h3 id="example7">fadeIn</h3>
+					Fade in animation
+
+					<div class="officialConfig">
+						<code> WellUI.fadeIn(elem, options)</code>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">elem {HTMLElement}</mark></span>
+							<span class="jDocText">Element for operate</span>
+						</span>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">options {Object}</mark></span>
+							<span class="jDocText">Animation config: <br>
+								 <b>duration</b> {Int} {Default value| 1}  -> animation duration <br>
+        						 <b>timing</b> {String} {Default value| ease-out} -> animation timing function <br>
+        						 <b>callback</b> {function} {Default value| null} -> callback function that fire when animation is done
+							</span>
+						</span>
+
+					</div>
+				</div>
+				<div class="code">
+					<h4>Use with default config</h4>
+					<code>
+						WellUI.fadeIn(document.getElementById('example7'));
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+					<h4>Use with custom config</h4>
+					<code>
+						WellUI.fadeIn( document.getElementById('example7'), {
+						'duration' : 2,
+						'timing' : 'linear',
+						'callback' : function () {
+						console.log("fade in done")
+						}
+						});
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+
+			<section class="sub" id="sub8">
+				<div class="example">
+					<h3 id="example8">transitionEndCallback</h3>
+					Check when transition is ended, fire callback and remove itself from listeners
+
+					<div class="officialConfig">
+						<code> WellUI.transitionEndCallback = function (elem, callback)</code>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">elem {HTMLElement}</mark></span>
+							<span class="jDocText">Element for operate</span>
+						</span>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">callback {Function}</mark></span>
+							<span class="jDocText">
+								Callback function
+								<br>
+								!Important:   <b>this</b> ->  handled element
+							</span>
+						</span>
+
+					</div>
+				</div>
+				<div class="code">
+					<h4>Add some transition end callback to element with 'sub8' id</h4>
+					<code>
+						var sub8 = document.getElementById('sub8');
+						<br>
+						<br>
+						sub8.addEventListener('mouseover', function () {
+						this.style.backgroundColor = 'purple';
+						});
+						<br>
+						<br>
+
+						WellUI.transitionEndCallback(sub8, function () {
+						console.log('transition done');
+						this.removeAttribute('style');
+						})
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+					<p>After executing - try move  mouse on method description,
+						and you  see transition, and when it`s finished - message will be written in console.
+						When you try to did this second time, nothing happen, because listener is self-removed</p>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+
+			<section class="sub" id="sub9">
+				<div class="example">
+					<h3 id="example9">searchParentByClassName</h3>
+					Search parent element that matched to class name
+
+					<div class="officialConfig">
+						<code> WellUI.searchParentByClassName(elem, parentClass)</code>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">elem {HTMLElement}</mark></span>
+							<span class="jDocText">The element from which the search begins</span>
+						</span>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">parentClass {String}</mark></span>
+							<span class="jDocText">Class name that we looking for. Can be with dot like '.className' or clean like 'className'</span>
+						</span>
+
+					</div>
+				</div>
+				<div class="code">
+					<h4>Find parent el with 'sub' class name without dot from el with 'example9'</h4>
+					<code>
+						var ex9 = document.getElementById('example9');
+						<br>
+						<br>
+						WellUI.searchParentByClassName(ex9, 'sub').style.backgroundColor = 'green';
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+					<h4>Search class name with dot</h4>
+					<code>
+						var ex9 = document.getElementById('example9');
+						<br>
+						<br>
+						WellUI.searchParentByClassName(ex9, '.sub').style.backgroundColor = 'green';
+					</code>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+			<section class="sub" id="sub10">
+				<div class="example">
+					<h3 id="example10">holdEvent</h3>
+					Improved stopPropagation without stopping a bubbling
+
+					<div class="officialConfig">
+						<code> WellUI.holdEvent = function is return {set, addAndKepEvent, getHoldMarkName}</code>
+						set(e);
+						<br>
+						<i>Set hold mark to event Object</i>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">e {Event}</mark></span>
+							<span class="jDocText">Event that we want to keep</span>
+						</span>
+						<br>
+						addAndKepEvent(element, eventName);
+						<br>
+						<i>set event listener to element and than set hold mark to event Object</i>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">element {HTMLElement}</mark></span>
+							<span class="jDocText">Class name that we looking for. Can be with dot like '.className' or clean like 'className'</span>
+						</span>
+						<span class="jDoc">
+							<span class="jDocOfficial">@param<mark class="jDocTitle">eventName {Event}</mark></span>
+							<span class="jDocText">Event that we listen on element</span>
+						</span>
+						<br>
+						getHoldMarkName()
+						<br>
+						<i>get hold mark name </i>
+
+					</div>
+				</div>
+				<div class="code">
+					<h4>Hold event of element with 'ex10' id inside his event handler</h4>
+					<code>
+						var ex10 = document.getElementById('example10'),
+						sub10 = document.getElementById('sub10'),
+						holdEvent = WellUI.holdEvent();
+						<br>
+						<br>
+						sub10.addEventListener('click', function (e) {
+						if(e[holdEvent.getHoldMarkName()]) {
+						console.log("detect hold click-event")
+						}
+						console.log('normal click-event handle')
+						});
+						<br>
+						<br>
+						ex10.addEventListener('click', function (e) {
+						holdEvent.set(e);
+						console.log('clicked on the ex10')
+						});
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+					<p>When you click on holdEvent title ("ex10"),
+						you will see that we detected bubbled click-event,
+						and we can do something (or abort some operations)
+						and after that event just bubbling to upward</p>
+					<h4>Add Event Listener to element with 'ex10' id and hold them</h4>
+					<code>
+						var ex10 = document.getElementById('example10'),
+						sub10 = document.getElementById('sub10'),
+						holdEvent = WellUI.holdEvent();
+						<br>
+						<br>
+						sub10.addEventListener('click', function (e) {
+						if(e[holdEvent.getHoldMarkName()]) {
+						console.log("detect hold click-event")
+						}
+						console.log('normal click-event handle')
+						});
+						<br>
+						<br>
+						holdEvent.addAndKeppEvent(ex10, 'click');
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+				</div>
+				<div class="clr"></div>
+			</section>
+			<section class="sub" id="sub11">
+				<div class="example">
+					<h3 id="example11">getTransitionEndEventName</h3>
+					Get the name of current transition end Event <br> (difference between browsers)
+
+					<div class="officialConfig">
+						<code> WellUI.getTransitionEndEventName()</code>
+					</div>
+				</div>
+				<div class="code">
+					<h4>Let`s know what the name of transition end in your browser ;)</h4>
+					<code>
+						console.log(WellUI.getTransitionEndEventName());
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+			<section class="sub" id="sub12">
+				<div class="example">
+					<h3 id="example12">extend</h3>
+					Extends object by another object
+					<div class="officialConfig">
+						<code> WellUI.extend(base, defaultConfObj, customConfObj)</code>
+					</div>
+					<span class="jDoc">
+						<span class="jDocOfficial">@param<mark class="jDocTitle">base {Object}</mark></span>
+						<span class="jDocText">An empty object which will store the result</span>
+					</span>
+					<span class="jDoc">
+						<span class="jDocOfficial">@param<mark class="jDocTitle">defaultConfObj {Object}</mark></span>
+						<span class="jDocText">Object with default config options</span>
+					</span><span class="jDoc">
+						<span class="jDocOfficial">@param<mark class="jDocTitle">customConfObj {Object}</mark></span>
+						<span class="jDocText">Object with custom config options</span>
+					</span>
+				</div>
+				<div class="code">
+					<h4>Let`s extend default conf obj by a custom config</h4>
+					<code>
+						var  defaults = {
+						duration: '1',
+						timing : 'ease-out',
+						callback : null
+						},
+						<br><br>
+						custom = {
+						duration: '5'
+						},
+						<br><br>
+						resultConfig = WellUI.extend({}, defaults, custom);
+						<br><br>
+						console.log(resultConfig);
+					</code>
+					<p>You can execute this code into console of this page for a demo.</p>
+
+				</div>
+				<div class="clr"></div>
+			</section>
+			<div class="clr"></div>
+        </div>
+
+		<script type="text/javascript" src="./js/WellUI.js"></script>
+</body>
+
+</html>

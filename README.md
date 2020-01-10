@@ -11,6 +11,6 @@ Only 14 kb in uncompressed style and 4 kb in compressed.
 
 To use it, you just need to include a library file in to your web-page.
 
-<a href="http://wellnine.github.io/WellUI" target="_blank"><b>Documentation and demo</b></a>  
+<a href="http://velidan.github.io/WellUI" target="_blank"><b>Documentation and demo</b></a>  
 <i>All code examples  you can execute in console and see result.</i>
 
